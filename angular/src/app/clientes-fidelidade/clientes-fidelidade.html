@@ -1,0 +1,10 @@
+<h2>Clientes Mais Pedidos</h2>
+
+<div *ngIf="ranking.length === 0">
+  <p>Nenhum dado disponível no momento.</p>
+</div>
+
+<div *ngFor="let cliente of ranking; let i = index" class="clientes-card">
+  <h3>{{ i + 1 }}º - {{ cliente.nome }}</h3>
+<p>Quantidade de pedidos: {{ cliente.quantidadePedidos }}</p>
+</div>

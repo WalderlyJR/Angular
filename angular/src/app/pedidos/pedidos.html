@@ -1,0 +1,30 @@
+<h2>Cadastrar Novo Pedido</h2>
+
+<form (ngSubmit)="criarPedido()">
+  <label for="cpf">CPF do Cliente:</label>
+  <input type="text" id="cpf" [(ngModel)]="novoPedido.cpf" name="cpf" required />
+
+  <label for="pratoId">Prato:</label>
+  <select id="pratoId" [(ngModel)]="novoPedido.pratoId" name="pratoId" required>
+    <option *ngFor="let prato of pratos" [value]="prato.id">{{ prato.nome }}</option>
+  </select>
+
+  <button type="submit">Cadastrar Pedido</button>
+</form>
+
+<hr />
+
+<button (click)="carregarPedidos()">
+  {{ pedidosVisiveis ? 'Atualizar Lista de Pedidos' : 'Listar Todos os Pedidos' }}
+</button>
+
+<div *ngIf="pedidosVisiveis">
+  <h2>Lista de Pedidos</h2>
+  <ul>
+    <li *ngFor="let pedido of pedidos">
+      <strong>CPF:</strong> {{ pedido.Cliente?.cpf }} |
+      <strong>Prato:</strong> {{ pedido.Prato?.nome }}
+
+    </li>
+  </ul>
+</div>

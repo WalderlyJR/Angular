@@ -1,0 +1,26 @@
+<h2>{{ editandoClienteId ? 'Editar Cliente' : 'Novo Cliente' }}</h2>
+
+<div>
+  <input [(ngModel)]="novoCliente.nome" placeholder="Nome Completo">
+  <input [(ngModel)]="novoCliente.cpf" placeholder="CPF (11 dígitos)">
+  <button (click)="salvarCliente()">
+    {{ editandoClienteId ? 'Atualizar' : 'Cadastrar' }}
+  </button>
+  <button *ngIf="editandoClienteId" (click)="limparFormulario()">Cancelar</button>
+</div>
+
+<hr>
+
+<button (click)="carregarClientes()">Listar Clientes</button>
+
+<ul *ngIf="clientesVisiveis && clientes.length > 0">
+  <li *ngFor="let cliente of clientes">
+    <strong>{{ cliente.nome }}</strong> — CPF: {{ cliente.cpf }}
+    <button (click)="editarCliente(cliente)">Editar</button>
+    <button (click)="excluirCliente(cliente.id!)">Excluir</button>
+  </li>
+</ul>
+
+<p *ngIf="clientesVisiveis && clientes.length === 0">
+  Nenhum cliente cadastrado ainda.
+</p>

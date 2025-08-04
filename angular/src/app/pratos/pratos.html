@@ -1,0 +1,29 @@
+<h2>Lista de Pratos</h2>
+
+<ul *ngIf="pratos.length > 0">
+  <li *ngFor="let prato of pratos">
+    <strong>{{ prato.nome }}</strong> — R$ {{ prato.preco | number:'1.2-2' }}
+    <button (click)="editarPrato(prato)">Editar</button>
+    <button (click)="excluirPrato(prato.id!)">Excluir</button>
+  </li>
+</ul>
+
+<p *ngIf="pratos.length === 0">Nenhum prato cadastrado ainda.</p>
+
+<hr>
+
+<!-- Botão para exibir o formulário -->
+<button (click)="mostrarFormulario()">Cadastrar novo prato</button>
+
+<!-- Formulário de cadastro/edição -->
+<div *ngIf="formularioVisivel">
+  <h3>{{ editandoPratoId ? 'Editar Prato' : 'Novo Prato' }}</h3>
+
+  <input [(ngModel)]="novoPrato.nome" placeholder="Nome do prato">
+  <input type="number" [(ngModel)]="novoPrato.preco" placeholder="Preço (R$)">
+
+  <button (click)="salvarPrato()">
+    {{ editandoPratoId ? 'Atualizar' : 'Cadastrar' }}
+  </button>
+  <button (click)="limparFormulario()">Cancelar</button>
+</div>
